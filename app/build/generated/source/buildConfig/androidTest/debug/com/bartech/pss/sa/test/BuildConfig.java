@@ -12,5 +12,5 @@ public final class BuildConfig {
   public static final String VERSION_NAME = "1.0.0";
   // Fields from build type: debug
   public static final String API_KEY = "ABCXYZ123TEST";
-  public static final String BASE_URL = "http://www.mocky.io/v2";
+  public static final String BASE_URL = "http://46.105.99.135:82/api/ManageERPApi";
 }

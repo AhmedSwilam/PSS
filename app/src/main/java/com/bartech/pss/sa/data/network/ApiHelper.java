@@ -16,8 +16,12 @@
 package com.bartech.pss.sa.data.network;
 
 import com.bartech.pss.sa.data.network.model.BlogResponse;
+import com.bartech.pss.sa.data.network.model.BranchModelResponse;
+import com.bartech.pss.sa.data.network.model.CompanyModelResponse;
 import com.bartech.pss.sa.data.network.model.LoginRequest;
+import com.bartech.pss.sa.data.network.model.LoginRequestt;
 import com.bartech.pss.sa.data.network.model.LoginResponse;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.data.network.model.LogoutResponse;
 import com.bartech.pss.sa.data.network.model.OpenSourceResponse;
 
@@ -34,6 +38,12 @@ public interface ApiHelper {
     Single<LoginResponse> doGoogleLoginApiCall(LoginRequest.GoogleLoginRequest request);
 
     Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest request);
+
+    Single<CompanyModelResponse> doServerCompanyApiCall();
+
+    Single<BranchModelResponse> doServerBranchApiCall();
+
+    Single<LoginResponsePss> dooServerLoginApiCall(LoginRequestt.ServerLoginRequestt requestt);
 
     Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request);
 

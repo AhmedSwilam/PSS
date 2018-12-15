@@ -154,7 +154,6 @@
                                         android:cursorVisible="true"
                                         android:gravity="center|left"
                                         android:hint="@string/username"
-                                        android:inputType="textEmailAddress"
                                         android:maxLength="50"
                                         android:padding="@dimen/_5sdp"
                                         android:paddingBottom="@dimen/_5sdp"
@@ -177,7 +176,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentBottom="true"
-                                        android:layout_alignStart="@+id/imageView"
+                                        android:layout_alignStart="@+id/img_sign_in"
                                         android:background="@drawable/input_border_bottom"
                                         android:cursorVisible="true"
                                         android:gravity="center|left"
@@ -190,6 +189,27 @@
 
                                 </android.support.design.widget.TextInputLayout>
 
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                        android:id="@+id/spinner_company"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:hintText="Choose Company">
+
+                                    </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+                                    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                                        android:id="@+id/spinner_branch"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        app:hintText="Choose Branch">
+                                    </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+                                </LinearLayout>
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
@@ -200,7 +220,7 @@
                                     android:background="@drawable/buttonlogin">
 
                                     <ImageView
-                                        android:id="@+id/imageView"
+                                        android:id="@+id/img_sign_in"
                                         android:layout_width="@dimen/_60sdp"
                                         android:layout_height="@dimen/_12sdp"
                                         android:layout_centerHorizontal="true"
@@ -214,8 +234,8 @@
                                         android:layout_height="@dimen/_20sdp"
                                         android:layout_centerVertical="true"
                                         android:layout_marginStart="@dimen/_2sdp"
-                                        android:layout_toEndOf="@+id/imageView"
-                                        android:layout_toRightOf="@+id/imageView"
+                                        android:layout_toEndOf="@+id/img_sign_in"
+                                        android:layout_toRightOf="@+id/img_sign_in"
                                         android:background="@drawable/arrowlogin" />
 
                                 </RelativeLayout>

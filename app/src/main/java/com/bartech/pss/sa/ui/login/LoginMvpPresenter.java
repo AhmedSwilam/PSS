@@ -26,8 +26,8 @@ import com.bartech.pss.sa.ui.base.MvpPresenter;
 @PerActivity
 public interface LoginMvpPresenter<V extends LoginMvpView> extends MvpPresenter<V> {
 
-    void onServerLoginClick(String email, String password);
-
-
+    void onServerLoginClick(String username, String password, String company, String branch);
+    void getCompanyName();
+    void getBranchName(String CompanyId);
 
 }

@@ -25,6 +25,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.provider.Settings;
 
 import com.bartech.pss.sa.R;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,5 +104,22 @@ public final class CommonUtils {
 
     public static String getTimeStamp() {
         return new SimpleDateFormat(AppConstants.TIMESTAMP_FORMAT, Locale.US).format(new Date());
+    }
+
+    public static void saveUser(Context context, LoginResponsePss loginResponsePss) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(loginResponsePss);
+        editor.putString("UserObject", json);
+        editor.commit();
+    }
+    public static LoginResponsePss getUser(Context context) {
+        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = settings.getString("UserObject", "");
+        LoginResponsePss obj = gson.fromJson(json, LoginResponsePss.class);
+        return obj;
+
     }
 }

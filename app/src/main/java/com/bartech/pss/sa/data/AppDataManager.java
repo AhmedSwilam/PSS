@@ -18,10 +18,6 @@ package com.bartech.pss.sa.data;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.internal.$Gson$Types;
-import com.google.gson.reflect.TypeToken;
 import com.bartech.pss.sa.data.db.DbHelper;
 import com.bartech.pss.sa.data.db.model.Option;
 import com.bartech.pss.sa.data.db.model.Question;
@@ -29,14 +25,22 @@ import com.bartech.pss.sa.data.db.model.User;
 import com.bartech.pss.sa.data.network.ApiHeader;
 import com.bartech.pss.sa.data.network.ApiHelper;
 import com.bartech.pss.sa.data.network.model.BlogResponse;
+import com.bartech.pss.sa.data.network.model.BranchModelResponse;
+import com.bartech.pss.sa.data.network.model.CompanyModelResponse;
 import com.bartech.pss.sa.data.network.model.LoginRequest;
+import com.bartech.pss.sa.data.network.model.LoginRequestt;
 import com.bartech.pss.sa.data.network.model.LoginResponse;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.data.network.model.LogoutResponse;
 import com.bartech.pss.sa.data.network.model.OpenSourceResponse;
 import com.bartech.pss.sa.data.prefs.PreferencesHelper;
 import com.bartech.pss.sa.di.ApplicationContext;
 import com.bartech.pss.sa.utils.AppConstants;
 import com.bartech.pss.sa.utils.CommonUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.$Gson$Types;
+import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -110,6 +114,26 @@ public class AppDataManager implements DataManager {
     public Single<LoginResponse> doFacebookLoginApiCall(LoginRequest.FacebookLoginRequest
                                                                 request) {
         return mApiHelper.doFacebookLoginApiCall(request);
+    }
+
+    @Override
+    public Single<CompanyModelResponse> doServerCompanyApiCall() {
+        return mApiHelper.doServerCompanyApiCall();
+    }
+
+//    @Override
+//    public Single<BranchModelResponse> doServerBranchApiCall(BranchRequest.ServerBranchRequest serverBranchRequest) {
+//        return mApiHelper.doServerBranchApiCall(serverBranchRequest);
+//    }
+
+    @Override
+    public Single<BranchModelResponse> doServerBranchApiCall() {
+        return mApiHelper.doServerBranchApiCall();
+    }
+
+    @Override
+    public Single<LoginResponsePss> dooServerLoginApiCall(LoginRequestt.ServerLoginRequestt requestt) {
+        return mApiHelper.dooServerLoginApiCall(requestt);
     }
 
     @Override

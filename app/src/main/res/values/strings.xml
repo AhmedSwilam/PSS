@@ -61,9 +61,9 @@
     <string name="btn_next">Next</string>
 
     <!--Login Validation-->
-    <string name="empty_email">Please provide a non empty email.</string>
+    <string name="empty_email">من فضلك ادخل اسم المستخدم</string>
     <string name="invalid_email">Please provide a valid email.</string>
-    <string name="empty_password">Please provide a non empty password.</string>
+    <string name="empty_password">من فضلك ادخل الرقم السرى</string>
 
     <!--about fragment-->
     <string name="project_info">This sample app implements MVP architecture using Dagger2, GreenDao, RxJava, FastAndroidNetworking and PlaceholderView</string>

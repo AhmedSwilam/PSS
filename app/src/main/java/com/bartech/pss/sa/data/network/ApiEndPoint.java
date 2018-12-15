@@ -32,6 +32,15 @@ public final class ApiEndPoint {
     public static final String ENDPOINT_SERVER_LOGIN = BuildConfig.BASE_URL
             + "/588d15f5100000a8072d2945";
 
+    public static final String ENDPOINT_SERVER_LOGIN_RESPONSE = BuildConfig.BASE_URL
+            + "/Login";
+
+    public static final String ENDPOINT_SERVER_COMPANY_RESPONSE = BuildConfig.BASE_URL
+            + "/GetCompany";
+
+    public static final String ENDPOINT_SERVER_BRANCH_RESPONSE = BuildConfig.BASE_URL
+            + "/BranchSelectAll?CompanyId=1";
+
     public static final String ENDPOINT_LOGOUT = BuildConfig.BASE_URL
             + "/588d161c100000a9072d2946";
 

@@ -1502,8 +1502,8 @@
     <string name="disp3">Disp 1</string>
     <string name="disp_no.">Dispenser No.</string>
     <string name="dispenser_text">Dispensers Daily Value Input</string>
-    <string name="empty_email">Please provide a non empty email.</string>
-    <string name="empty_password">Please provide a non empty password.</string>
+    <string name="empty_email">من فضلك ادخل اسم المستخدم</string>
+    <string name="empty_password">من فضلك ادخل الرقم السرى</string>
     <string name="empty_screen">We do not have anything\nhere right now.</string>
     <string name="end_count">End Counter</string>
     <string name="feed">My Feed</string>

@@ -16,8 +16,12 @@
 package com.bartech.pss.sa.data.network;
 
 import com.bartech.pss.sa.data.network.model.BlogResponse;
+import com.bartech.pss.sa.data.network.model.BranchModelResponse;
+import com.bartech.pss.sa.data.network.model.CompanyModelResponse;
 import com.bartech.pss.sa.data.network.model.LoginRequest;
+import com.bartech.pss.sa.data.network.model.LoginRequestt;
 import com.bartech.pss.sa.data.network.model.LoginResponse;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.data.network.model.LogoutResponse;
 import com.bartech.pss.sa.data.network.model.OpenSourceResponse;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
@@ -65,6 +69,41 @@ public class AppApiHelper implements ApiHelper {
                 .build()
                 .getObjectSingle(LoginResponse.class);
     }
+
+    @Override
+    public Single<CompanyModelResponse> doServerCompanyApiCall() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_COMPANY_RESPONSE)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .build()
+                .getObjectSingle(CompanyModelResponse.class);
+    }
+
+//    @Override
+//    public Single<BranchModelResponse> doServerBranchApiCall(BranchRequest.ServerBranchRequest serverBranchRequest) {
+//        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_BRANCH_RESPONSE)
+//                .addHeaders(mApiHeader.getPublicApiHeader())
+//                .addPathParameter(serverBranchRequest)
+//                .build()
+//                .getObjectSingle(BranchModelResponse.class);
+//    }
+
+    @Override
+    public Single<BranchModelResponse> doServerBranchApiCall() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_BRANCH_RESPONSE)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .build()
+                .getObjectSingle(BranchModelResponse.class);
+    }
+
+    @Override
+    public Single<LoginResponsePss> dooServerLoginApiCall(LoginRequestt.ServerLoginRequestt requestt) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LOGIN_RESPONSE)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addBodyParameter(requestt)
+                .build()
+                .getObjectSingle(LoginResponsePss.class);
+    }
+
 
     @Override
     public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest

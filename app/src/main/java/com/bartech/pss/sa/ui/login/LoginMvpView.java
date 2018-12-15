@@ -15,7 +15,12 @@
 
 package com.bartech.pss.sa.ui.login;
 
+import com.bartech.pss.sa.data.network.model.Datum;
+import com.bartech.pss.sa.data.network.model.DatumBranch;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.ui.base.MvpView;
+
+import java.util.List;
 
 /**
  * Created by janisharali on 27/01/17.
@@ -24,4 +29,8 @@ import com.bartech.pss.sa.ui.base.MvpView;
 public interface LoginMvpView extends MvpView {
 
     void openShiftActivity();
+    void setCompanyName(List<Datum> data);
+    void setBranchName(List<DatumBranch> data);
+    void saveLoginResponsePss(LoginResponsePss loginResponsePss);
+
 }

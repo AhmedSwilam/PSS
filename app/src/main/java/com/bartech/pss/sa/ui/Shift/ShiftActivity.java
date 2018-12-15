@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bartech.pss.sa.R;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.ui.base.BaseActivity;
 import com.bartech.pss.sa.ui.tank.TankActivity;
 import com.bartech.pss.sa.utils.AppConstants;
@@ -85,6 +86,9 @@ public class ShiftActivity extends BaseActivity implements ShiftMvpView {
         setUnBinder(ButterKnife.bind(this));
 
         mPresenter.onAttach(ShiftActivity.this);
+
+        LoginResponsePss loginResponsePss = CommonUtils.getUser(this);
+
         setDateAndTime();
 
 
@@ -101,11 +105,7 @@ public class ShiftActivity extends BaseActivity implements ShiftMvpView {
         if (!CommonUtils.getPreference(this, SHAREDPREFERNCE_TOTAL3).equalsIgnoreCase(""))
             txtLiters3.setText(CommonUtils.getPreference(this, SHAREDPREFERNCE_TOTAL3));
         disableAllRadioButtons();
-        btnToggleBusiness();
 
-    }
-
-    private void btnToggleBusiness() {
         btnToggleStatic.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
             @Override
             public void onToggle(boolean on) {
@@ -213,6 +213,7 @@ public class ShiftActivity extends BaseActivity implements ShiftMvpView {
 
             }
         });
+
     }
 
     public void setDateAndTime() {

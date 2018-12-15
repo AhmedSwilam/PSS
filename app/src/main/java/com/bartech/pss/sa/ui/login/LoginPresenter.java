@@ -16,9 +16,12 @@
 package com.bartech.pss.sa.ui.login;
 
 import com.androidnetworking.error.ANError;
+import com.bartech.pss.sa.R;
 import com.bartech.pss.sa.data.DataManager;
-import com.bartech.pss.sa.data.network.model.LoginRequest;
-import com.bartech.pss.sa.data.network.model.LoginResponse;
+import com.bartech.pss.sa.data.network.model.BranchModelResponse;
+import com.bartech.pss.sa.data.network.model.CompanyModelResponse;
+import com.bartech.pss.sa.data.network.model.LoginRequestt;
+import com.bartech.pss.sa.data.network.model.LoginResponsePss;
 import com.bartech.pss.sa.ui.base.BasePresenter;
 import com.bartech.pss.sa.utils.rx.SchedulerProvider;
 
@@ -44,64 +47,123 @@ public class LoginPresenter<V extends LoginMvpView> extends BasePresenter<V>
     }
 
     @Override
-    public void onServerLoginClick(String email, String password) {
-        //validate email and password
-//        if (email == null || email.isEmpty()) {
-//            getMvpView().onError(R.string.empty_email);
-//            return;
-//        }
-//        if (!CommonUtils.isEmailValid(email)) {
-//            getMvpView().onError(R.string.invalid_email);
-//            return;
-//        }
-//        if (password == null || password.isEmpty()) {
-//            getMvpView().onError(R.string.empty_password);
-//            return;
-//        }
-//        getMvpView().showLoading();
-        getMvpView().openShiftActivity();
+    public void onServerLoginClick(String username, String password, String company, String branch) {
+        //validate username and password
+        if (getMvpView()!=null){
+            if (username == null && username.isEmpty()) {
+                getMvpView().onError(R.string.empty_email);
+                return;
+            }
+            if (password == null && password.isEmpty()) {
+                getMvpView().onError(R.string.empty_password);
+                return;
+            }
+            getCompositeDisposable().add(getDataManager()
+                    .dooServerLoginApiCall(new LoginRequestt.ServerLoginRequestt(username, password, company, branch))
+                    .subscribeOn(getSchedulerProvider().io())
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribe(new Consumer<LoginResponsePss>() {
+                        @Override
+                        public void accept(LoginResponsePss responsePss) throws Exception {
+                            if (responsePss.getData() != null ) {
+                                getMvpView().saveLoginResponsePss(responsePss);
+                                getMvpView().openShiftActivity();
+                            }
 
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+
+                            if (!isViewAttached()) {
+                                return;
+                            }
+
+                            getMvpView().hideLoading();
+
+                            // handle the login error here
+                            if (throwable instanceof ANError) {
+                                ANError anError = (ANError) throwable;
+                                handleApiError(anError);
+                            }
+                        }
+                    }));
+        }
+
+    }
+
+    @Override
+    public void getCompanyName() {
         getCompositeDisposable().add(getDataManager()
-                .doServerLoginApiCall(new LoginRequest.ServerLoginRequest(email, password))
+                .doServerCompanyApiCall()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new Consumer<LoginResponse>() {
-                    @Override
-                    public void accept(LoginResponse response) throws Exception {
-                        getDataManager().updateUserInfo(
-                                response.getAccessToken(),
-                                response.getUserId(),
-                                DataManager.LoggedInMode.LOGGED_IN_MODE_SERVER,
-                                response.getUserName(),
-                                response.getUserEmail(),
-                                response.getGoogleProfilePicUrl());
+                .subscribe(new Consumer<CompanyModelResponse>() {
+                               @Override
+                               public void accept(CompanyModelResponse companyModelResponse) throws Exception {
+                                   if (companyModelResponse.getData() != null) {
+                                       getMvpView().setCompanyName(companyModelResponse.getData());
 
-                        if (!isViewAttached()) {
-                            return;
+                                   }
+
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   if (!isViewAttached()) {
+                                       return;
+                                   }
+
+                                   getMvpView().hideLoading();
+
+                                   // handle the login error here
+                                   if (throwable instanceof ANError) {
+                                       ANError anError = (ANError) throwable;
+                                       handleApiError(anError);
+                                   }
+
+                               }
+                           }
+                ));
+
+
+    }
+
+    @Override
+    public void getBranchName(String CompanyId) {
+            getCompositeDisposable().add(getDataManager()
+                    .doServerBranchApiCall()
+                    .observeOn(getSchedulerProvider().ui())
+                    .subscribeOn(getSchedulerProvider().io())
+                    .subscribe(new Consumer<BranchModelResponse>() {
+                        @Override
+                        public void accept(BranchModelResponse branchModelResponse) throws Exception {
+                            if (branchModelResponse.getData() != null) {
+                                getMvpView().setBranchName(branchModelResponse.getData());
+                            }
+
                         }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            if (!isViewAttached()) {
+                                return;
+                            }
 
-                        getMvpView().hideLoading();
-                        getMvpView().openShiftActivity();
+                            getMvpView().hideLoading();
 
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
+                            // handle the login error here
+                            if (throwable instanceof ANError) {
+                                ANError anError = (ANError) throwable;
+                                handleApiError(anError);
+                            }
 
-                        if (!isViewAttached()) {
-                            return;
                         }
+                    }));
 
-                        getMvpView().hideLoading();
+        }
 
-                        // handle the login error here
-                        if (throwable instanceof ANError) {
-                            ANError anError = (ANError) throwable;
-                            handleApiError(anError);
-                        }
-                    }
-                }));
     }
 
 
-}
+
